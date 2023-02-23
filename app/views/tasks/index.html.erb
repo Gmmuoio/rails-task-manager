@@ -1,0 +1,17 @@
+<h1>My tasks</h1>
+
+<%= form_tag tasks_path, method: :delete do %>
+  <ul>
+    <% @tasks.each do |task| %>
+      <li>
+        <%= check_box_tag 'task_ids[]', task.id %>
+        <%= task.title %>
+        <%= link_to 'Edit', edit_multiple_tasks_path(ids: params[:task_ids]) %>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= button_tag "Delete selected tasks", class: "btn btn-danger", data: { turbo_confirm: 'Are you sure?' } %>
+<% end %>
+
+<p><%= link_to 'Create a task', new_task_path %></p>
